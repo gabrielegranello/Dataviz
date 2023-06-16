@@ -44,7 +44,6 @@ else:
 
     st.pyplot(fig)
 
-st.write(greatbritain_hpi.columns)
 
 regions=st.multiselect('Choose a region', list(pd.unique(greatbritain_hpi.RegionName_x)), default=['Aberdeenshire','Angus']);
 greatbritain_df= pd.DataFrame(greatbritain_hpi.drop(columns='geometry')); # convert the geodataframe into dataframe
