@@ -44,6 +44,23 @@ else:
 
     st.pyplot(fig)
 
+st.write(greatbritain_hpi.columns)
+
+regions=st.multiselect('Choose a region', list(pd.unique(greatbritain_hpi.RegionName_x)), default=['Aberdeenshire','Angus']);
+greatbritain_df= pd.DataFrame(greatbritain_hpi.drop(columns='geometry')); # convert the geodataframe into dataframe
+
+if not regions:
+    st.error("Please select at least one region.")
+else:        
+    fig,ax=plt.subplots(figsize=[15,15])
+    for region in regions:
+        x=greatbritain_df[greatbritain_df.RegionName_x==region].Date;
+        y=greatbritain_df[greatbritain_df.RegionName_x==region].AveragePrice;
+        
+        ax.plot(x,y,label=str(region)); # extract the dataset for that given date
+
+    ax.legend()
+    st.pyplot(fig)
 
 # with st.container():
 #     st.title("Skylark walls - Web app")
